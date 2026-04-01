@@ -1,0 +1,209 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  STUDENT
+  PARENT
+  TEACHER
+  ADMIN
+}
+
+enum BoardType {
+  CBSE
+  ICSE
+  STATE
+}
+
+enum LessonType {
+  INTERACTIVE
+  STORY
+  VISUAL
+  PRACTICE
+}
+
+enum MasteryLevel {
+  NOT_STARTED
+  UNDERSTAND
+  SOLVE
+  APPLY
+  ANALYZE
+  CREATE
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String          @id @default(cuid())
+  email         String          @unique
+  passwordHash  String
+  name          String
+  role          UserRole
+  avatar        String?
+  language      String          @default("en")
+  createdAt     DateTime        @default(now())
+
+  studentProfile StudentProfile?
+  parentProfile  ParentProfile?
+  teacherProfile TeacherProfile?
+  sessions       Session[]
+  masteryRecords MasteryRecord[]
+  progressLogs   StudentProgress[]
+
+  @@index([role])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudentProfile {
+  id             String     @id @default(cuid())
+  userId         String     @unique
+  grade          Int
+  board          BoardType
+  learningStyle  String
+  streakDays     Int        @default(0)
+  totalXP        Int        @default(0)
+  linkedParentId String?
+
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  linkedParent ParentProfile? @relation(fields: [linkedParentId], references: [id])
+}
+
+model ParentProfile {
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  linkedStudentIds String[]
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  students StudentProfile[]
+}
+
+model TeacherProfile {
+  id       String   @id @default(cuid())
+  userId   String   @unique
+  subjects String[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Subject {
+  id          String   @id @default(cuid())
+  name        String
+  board       BoardType
+  grade       Int
+  description String
+  iconEmoji   String
+
+  topics Topic[]
+}
+
+model Topic {
+  id               String   @id @default(cuid())
+  subjectId        String
+  title            String
+  description      String
+  difficulty       Int
+  estimatedMinutes Int
+  prerequisites    String[]
+  learningObjectives String[]
+  commonMistakes   String[]
+  realWorldExamples String[]
+  order            Int
+
+  subject         Subject         @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  lessons         Lesson[]
+  assessments     Assessment[]
+  masteryRecords  MasteryRecord[]
+}
+
+model Lesson {
+  id               String     @id @default(cuid())
+  topicId          String
+  title            String
+  content          String
+  type             LessonType
+  difficulty       Int
+  estimatedMinutes Int
+  order            Int
+
+  topic    Topic         @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  reviews  LessonReview[]
+}
+
+model Assessment {
+  id            String  @id @default(cuid())
+  topicId        String
+  title         String
+  questions     Json
+  passingScore  Int
+  timeLimit     Int
+  masteryTarget MasteryLevel
+
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+model MasteryRecord {
+  id            String       @id @default(cuid())
+  studentId     String
+  topicId       String
+  level         MasteryLevel @default(NOT_STARTED)
+  score         Float        @default(0)
+  attempts      Int          @default(0)
+  lastAttemptAt DateTime?
+
+  student User  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  topic   Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, topicId])
+}
+
+model StudentProgress {
+  id               String   @id @default(cuid())
+  studentId        String
+  date             DateTime
+  minutesSpent     Int
+  lessonsCompleted Int
+  assessmentsTaken Int
+  xpEarned         Int
+
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, date])
+}
+
+model AgentLog {
+  id        String   @id @default(cuid())
+  agentName String
+  action    String
+  input     String
+  output    String
+  latencyMs Int
+  tokensUsed Int
+  createdAt DateTime @default(now())
+}
+
+model LessonReview {
+  id       String       @id @default(cuid())
+  lessonId String
+  teacherId String
+  status   ReviewStatus @default(PENDING)
+  feedback String?
+
+  lesson  Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
