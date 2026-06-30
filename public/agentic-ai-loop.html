@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agentic AI Loop: Words In, Words Out</title>
+  <style>
+    :root{--bg:#07111f;--panel:#0d1b2f;--ink:#f8fafc;--muted:#bfd0e6;--line:#33506f;--accent:#f59e0b;--good:#22c55e;--bad:#fb7185;--blue:#38bdf8;--purple:#a78bfa;--card:#12243d;--dim:.35}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top left,#16325b 0,#07111f 38%,#020617 100%);color:var(--ink)}main{max-width:1220px;margin:0 auto;padding:28px}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:stretch}.card{background:rgba(13,27,47,.94);border:1px solid #254160;border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.32);padding:24px}.eyebrow{color:var(--accent);font-weight:900;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:clamp(2.4rem,5vw,5rem);line-height:.95;margin:10px 0}.big{font-size:1.35rem;line-height:1.45;color:#e8f1ff}.takeaway{border-left:8px solid var(--accent);font-size:1.35rem}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;margin-top:20px}.diagramWrap{position:relative;min-height:620px}.diagram{position:relative;height:590px;border-radius:22px;background:linear-gradient(180deg,#0a1528,#0d1b2f);border:1px solid #294765;overflow:hidden}.node{position:absolute;width:210px;min-height:112px;padding:14px;border:2px solid var(--line);border-radius:18px;background:#10213a;transition:.35s;z-index:2}.node h3{margin:0 0 8px;font-size:1.2rem}.node p{margin:0;color:var(--muted);font-size:.96rem}.node.active{border-color:var(--accent);box-shadow:0 0 0 5px rgba(245,158,11,.18),0 0 34px rgba(245,158,11,.36);transform:scale(1.04)}.node.done{border-color:var(--good)}#user{left:26px;top:34px}#prompt{left:330px;top:34px}#model{left:620px;top:34px}#action{left:620px;top:250px}#memory{left:330px;top:438px}#world{left:26px;top:250px}.arrow{position:absolute;height:4px;background:#416482;transform-origin:left center;z-index:1}.arrow::after{content:"";position:absolute;right:-1px;top:-7px;border-left:14px solid #416482;border-top:9px solid transparent;border-bottom:9px solid transparent}.arrow.active{background:var(--accent);box-shadow:0 0 20px rgba(245,158,11,.7)}.arrow.active::after{border-left-color:var(--accent)}#a1{left:238px;top:88px;width:86px}#a2{left:546px;top:88px;width:68px}#a3{left:726px;top:152px;width:92px;transform:rotate(90deg)}#a4{left:610px;top:304px;width:160px;transform:rotate(180deg)}#a5{left:238px;top:304px;width:86px;transform:rotate(180deg)}#a6{left:190px;top:372px;width:178px;transform:rotate(52deg)}#a7{left:435px;top:438px;width:180px;transform:rotate(-42deg)}.packet{position:absolute;width:24px;height:24px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent);opacity:0;z-index:4}.packet.run{opacity:1;animation:move 1.1s ease-in-out infinite alternate}@keyframes move{from{transform:translate(var(--sx),var(--sy))}to{transform:translate(var(--ex),var(--ey))}}.cycle{position:absolute;right:22px;bottom:18px;border:2px dashed #55708c;border-radius:18px;padding:12px 14px;color:#dbeafe;background:rgba(2,6,23,.55);font-weight:800}.caption h2{font-size:2rem;margin:0 0 10px}.caption p{font-size:1.2rem;line-height:1.45;color:#e7eef8}.textBox{background:#07111f;border:1px solid #2d4866;border-radius:16px;padding:14px;margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;color:#e0f2fe;font-size:1rem}.controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.controls button,.toggle button{font-size:1.05rem;font-weight:900;border:0;border-radius:14px;padding:13px 18px;color:#07111f;background:#e2e8f0;cursor:pointer}.controls button.primary{background:var(--accent)}.controls button:focus,.toggle button:focus{outline:4px solid #7dd3fc}.meter{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.mini{border-radius:16px;padding:14px;background:#0b1729;border:1px solid #2b4867}.mini strong{display:block;font-size:1.1rem}.mini span{color:var(--muted)}.contrast{margin-top:20px}.toggle{display:flex;gap:10px;margin:14px 0}.toggle button.on{background:var(--blue)}.compare{font-size:1.1rem;line-height:1.4;background:#07111f;border:1px solid #2d4866;border-radius:16px;padding:16px;min-height:120px}.callout{background:rgba(251,113,133,.12);border:1px solid var(--bad);border-radius:16px;padding:14px;margin-top:14px;font-size:1.08rem}.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;color:#dbeafe}.dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px}.notes{margin-top:20px}.notes summary{cursor:pointer;font-size:1.25rem;font-weight:900}.notes li{margin:.6rem 0;color:#e7eef8;font-size:1.05rem}@media (max-width:980px){.hero,.grid{grid-template-columns:1fr}.diagram{transform:scale(.88);transform-origin:top left;width:890px}.diagramWrap{overflow:auto;min-height:560px}.card{padding:18px}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="card">
+      <div class="eyebrow">Everyday anchor: a checklist clipboard</div>
+      <h1>Agentic AI is a loop, not a little person.</h1>
+      <p class="big">Imagine a meal-planning helper with a clipboard. It reads your request, writes a tiny checklist, checks a recipe list, writes the next instruction, and repeats. An <b>agent</b> is software that repeats this kind of text-driven cycle.</p>
+      <p class="big"><b>Where the analogy breaks:</b> a human with a clipboard understands dinner and hunger. This demo agent only moves words through rules and stored text, so it can sound confident while missing obvious meaning.</p>
+    </div>
+    <div class="card takeaway">
+      <div class="eyebrow">Single takeaway</div>
+      <p><b>An AI agent does not “decide” like a person.</b> Each cycle is: prompt text in → model text out → tool/action → small saved note → next prompt.</p>
+      <p class="big">Misconception to break: “The agent understands my life and remembers everything.” Watch the exact text boundary instead.</p>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card diagramWrap">
+      <div class="diagram" aria-label="Interactive diagram of an AI agent loop">
+        <div class="node" id="user"><h3>1. Person</h3><p>Plain request: “Plan a cheap vegetarian dinner.”</p></div>
+        <div class="node" id="prompt"><h3>2. Prompt</h3><p>The wrapper text that tells the model what to do.</p></div>
+        <div class="node" id="model"><h3>3. Model</h3><p>Predicts useful next words. No private understanding.</p></div>
+        <div class="node" id="action"><h3>4. Tool / action</h3><p>Looks up baked-in mock recipes or asks a follow-up.</p></div>
+        <div class="node" id="world"><h3>5. Result</h3><p>Observed output from the tool or person.</p></div>
+        <div class="node" id="memory"><h3>6. Memory note</h3><p>Only this short note carries into the next cycle.</p></div>
+        <div class="arrow" id="a1"></div><div class="arrow" id="a2"></div><div class="arrow" id="a3"></div><div class="arrow" id="a4"></div><div class="arrow" id="a5"></div><div class="arrow" id="a6"></div><div class="arrow" id="a7"></div>
+        <div class="packet" id="packet"></div>
+        <div class="cycle" id="cycleLabel">Cycle 1 of 2</div>
+      </div>
+      <div class="legend"><span><i class="dot" style="background:var(--accent)"></i>current step</span><span><i class="dot" style="background:var(--good)"></i>already happened</span><span><i class="dot" style="background:#416482"></i>text flow</span></div>
+    </div>
+
+    <div class="card caption">
+      <div class="eyebrow" id="stepKicker">Step 1</div>
+      <h2 id="stepTitle"></h2>
+      <p id="stepCaption"></p>
+      <div class="textBox" id="stepText"></div>
+      <div class="callout" id="callout"></div>
+      <div class="controls">
+        <button class="primary" id="playBtn">▶ Play</button>
+        <button id="pauseBtn">⏸ Pause</button>
+        <button id="nextBtn">Next →</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+      <div class="meter">
+        <div class="mini"><strong>Persists</strong><span id="persistText">Nothing yet.</span></div>
+        <div class="mini"><strong>Forgotten</strong><span id="forgetText">No previous cycle yet.</span></div>
+      </div>
+      <div class="contrast">
+        <div class="eyebrow">Contrast view</div>
+        <div class="toggle"><button id="withoutBtn">Without agent loop</button><button class="on" id="withBtn">With agent loop</button></div>
+        <div class="compare" id="compareText"></div>
+      </div>
+    </div>
+  </section>
+
+  <details class="card notes">
+    <summary>Presenter notes: per-step talking points</summary>
+    <ol id="notesList"></ol>
+  </details>
+</main>
+<script>
+const steps=[
+{node:'user',arrow:'a1',cycle:1,title:'Start with an ordinary request',caption:'No magic yet. A person types a goal. The agent cannot act until this goal becomes text in a prompt.',text:'USER TEXT:\nPlan a cheap vegetarian dinner for tonight. I have rice and carrots.',call:'You might expect the agent to “know dinner.” Watch: the only thing it receives is this text.',persist:'Nothing yet.',forget:'Nothing yet.',note:'Open by comparing the agent to a clipboard checklist, not a brain.'},
+{node:'prompt',arrow:'a2',cycle:1,title:'The request is wrapped into a prompt',caption:'A prompt is the instruction text handed to the model. It includes the user request plus rules like “use tools before answering.”',text:'PROMPT TO MODEL:\nYou are a meal-planning agent. Goal: cheap vegetarian dinner. Known ingredients: rice, carrots. If needed, choose ONE tool call from the mock recipe list.',call:'This wrapper strongly shapes the next words. Change the wrapper, and the “decision” changes.',persist:'Goal: cheap vegetarian dinner.',forget:'The agent has no hidden memory of your pantry beyond the words shown.',note:'Define prompt as wrapper text. Emphasize that this is visible machinery.'},
+{node:'model',arrow:'a3',cycle:1,title:'The model writes the next text',caption:'The model is a text predictor: software trained to continue text in useful patterns. Here it outputs a tool request, not an inner thought.',text:'MODEL OUTPUT:\nTOOL_CALL search_recipes\nquery: vegetarian rice carrots cheap',call:'Slightly deflating on purpose: “decision” means it produced the words TOOL_CALL search_recipes.',persist:'Goal + ingredients.',forget:'It does not remember your kitchen, schedule, or tastes unless placed in text.',note:'Say “words in, words out.” Avoid words like wants, believes, or understands.'},
+{node:'action',arrow:'a4',cycle:1,title:'A tool runs outside the model',caption:'A tool is ordinary code the agent can ask to run. This demo uses baked-in mock data, so it is deterministic and cannot call the internet.',text:'MOCK TOOL RESULT:\n1) Carrot fried rice — $4 — 20 min\n2) Lentil rice bowl — $6 — 35 min\n3) Carrot soup — needs bread',call:'The model did not magically know the recipes; the tool returned a small list.',persist:'Tool result will be summarized.',forget:'Full recipe database is not carried forward.',note:'Point at the tool box. This is where real systems may search, calculate, or click.'},
+{node:'memory',arrow:'a7',cycle:1,title:'Only a tiny note carries over',caption:'The loop boundary is here. Cycle 1 ends. The agent saves a short memory note; everything else must be re-sent or it is effectively gone.',text:'SAVED MEMORY NOTE:\nUser wants cheap vegetarian dinner. Best match found: Carrot fried rice, $4, 20 minutes.',call:'You might expect it remembers everything. Actually, only this saved note is guaranteed to enter the next cycle.',persist:'Saved note: carrot fried rice, $4, 20 min.',forget:'Exact search wording and unused recipe details.',note:'Pause here. This is the misconception-breaking moment about memory.'},
+{node:'prompt',arrow:'a2',cycle:2,title:'Cycle 2 begins with carried text',caption:'The next prompt is rebuilt from the saved note plus the goal. That is the boundary: new cycle, selected carry-over.',text:'NEXT PROMPT:\nGoal: answer the user. Memory note: Best match is Carrot fried rice, $4, 20 minutes. Ask one safety question if allergies are unknown.',call:'The agent seems continuous, but continuity is constructed by copying selected text forward.',persist:'Memory note + goal.',forget:'Everything not copied into this new prompt.',note:'Show that a new prompt is assembled. The loop, not a mind, creates continuity.'},
+{node:'model',arrow:'a3',cycle:2,title:'The model writes the final response',caption:'It now produces user-facing words from the prompt and memory note.',text:'MODEL OUTPUT TO USER:\nA cheap option is carrot fried rice: rice + carrots, about $4 and 20 minutes. Before cooking, do you have any soy or sesame allergy?',call:'It looks helpful, but it is still just generating text from the pieces shown.',persist:'If saved, the allergy answer could enter a later cycle.',forget:'If not saved, the allergy answer may disappear from future prompts.',note:'Connect final answer directly back to the exact memory note.'}
+];
+let i=0,timer=null,contrast='with';
+const nodes=[...document.querySelectorAll('.node')],arrows=[...document.querySelectorAll('.arrow')],packet=document.getElementById('packet');
+function render(){const s=steps[i];document.getElementById('stepKicker').textContent=`Step ${i+1} • Cycle ${s.cycle}`;document.getElementById('stepTitle').textContent=s.title;document.getElementById('stepCaption').textContent=s.caption;document.getElementById('stepText').textContent=s.text;document.getElementById('callout').textContent=s.call;document.getElementById('persistText').textContent=s.persist;document.getElementById('forgetText').textContent=s.forget;document.getElementById('cycleLabel').textContent=`Cycle ${s.cycle} of 2`;nodes.forEach((n,idx)=>{n.classList.toggle('active',n.id===s.node);n.classList.toggle('done',steps.findIndex(x=>x.node===n.id)<=i&&steps.findIndex(x=>x.node===n.id)!==-1&&n.id!==s.node)});arrows.forEach(a=>a.classList.toggle('active',a.id===s.arrow));movePacket(s.arrow);renderContrast()}
+function movePacket(a){const map={a1:[250,78,310,78],a2:[560,78,600,78],a3:[720,165,720,225],a4:[590,296,255,296],a5:[250,296,220,296],a6:[200,360,320,430],a7:[450,430,610,160]};const m=map[a]||[0,0,0,0];packet.style.setProperty('--sx',m[0]+'px');packet.style.setProperty('--sy',m[1]+'px');packet.style.setProperty('--ex',m[2]+'px');packet.style.setProperty('--ey',m[3]+'px');packet.classList.remove('run');void packet.offsetWidth;packet.classList.add('run')}
+function next(){i=(i+1)%steps.length;render()}function play(){if(!timer)timer=setInterval(next,3600)}function pause(){clearInterval(timer);timer=null}function reset(){pause();i=0;render()}function renderContrast(){document.getElementById('withBtn').classList.toggle('on',contrast==='with');document.getElementById('withoutBtn').classList.toggle('on',contrast==='without');document.getElementById('compareText').innerHTML=contrast==='with'?'<b>With the agent loop:</b> the system can break the job into cycles: ask a tool for recipes, save a short note, then answer. It buys structure and repeatable handoffs — not human understanding.':'<b>Without the agent loop:</b> one plain chatbot reply may guess a recipe immediately. Faster, but it may skip checking the recipe list and has no explicit boundary showing what was saved or forgotten.'}
+document.getElementById('playBtn').onclick=play;document.getElementById('pauseBtn').onclick=pause;document.getElementById('nextBtn').onclick=()=>{pause();next()};document.getElementById('resetBtn').onclick=reset;document.getElementById('withBtn').onclick=()=>{contrast='with';renderContrast()};document.getElementById('withoutBtn').onclick=()=>{contrast='without';renderContrast()};document.getElementById('notesList').innerHTML=steps.map((s,idx)=>`<li><b>Step ${idx+1}:</b> ${s.note}</li>`).join('');render();
+</script>
+</body>
+</html>
